@@ -4,17 +4,15 @@ namespace App\Tests\Integration;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 
 class ProductControllerIntegrationTest extends WebTestCase
 {
-
     /** @dataProvider correctMarketplaceProvider */
     public function testWhenGettingSingleProductReturns200(int $id, string $marketplace): void
     {
-        $client = static::createClient();
-
-        $client->request(
-            'GET',
+        static::createClient()->request(
+            Request::METHOD_GET,
             sprintf('/products/%d?filter[marketplace]=%s', $id, $marketplace),
         );
 
@@ -24,10 +22,8 @@ class ProductControllerIntegrationTest extends WebTestCase
     /** @dataProvider brokenRequestProvider */
     public function testWhenSendingWrongRequestReturns400(mixed $id, mixed $marketplace): void
     {
-        $client = static::createClient();
-
-        $client->request(
-            'GET',
+        static::createClient()->request(
+            Request::METHOD_GET,
             sprintf('/products/%d?filter[marketplace]=%s', $id, $marketplace),
         );
 
