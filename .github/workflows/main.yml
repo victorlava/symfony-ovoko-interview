@@ -14,10 +14,11 @@ jobs:
         uses: shivammathur/setup-php@2.29.0
         with:
           php-version: '8.1'
+          coverage: xdebug
           tools: composer:v2, phpunit:9.5
 #     
       - name: Install Composer dependencies
         run: composer install --no-progress --prefer-dist --optimize-autoloader
         
       - name: Run PHPUnit
-        run: vendor/bin/phpunit --testsuite unit
+        run: vendor/bin/phpunit --testsuite unit --coverage-clover code-coverage
