@@ -2,28 +2,23 @@
 
 namespace App\Client;
 
-use App\Dto\ClientProviderDto;
 use App\Response\ClientProviderResponse;
 
-class ClientProviderA implements ClientProviderInterface
+class ClientProviderA extends AbstractClientProvider implements ClientProviderInterface
 {
-    public function __construct(
-        private readonly HttpClientInterface $client,
-        private readonly ClientProviderDto $settings,
-    )
-    {
-    }
-
     public function getProduct(int $id): ClientProviderResponse
     {
-        $dto = $this->settings;
-        $response = $this->client->request('GET', sprintf($dto->getUrl(), $id);
-        $body = json_decode($response->getContent(), 'json');
+        $body = $this->request($id, $this->dto->getUrl());
 
         return new ClientProviderResponse(
             $body['id'],
             $body['productName'],
-            $dto->shouldApplyConversionRate() ? $body['productPrice'] * $dto->getConversionRate() : $body['productPrice']
+            $this->getPrice($body['productPrice']),
         );
+    }
+
+    private function getPrice(float $price): float
+    {
+        return $this->dto->shouldApplyConversionRate() ? $price * $this->dto->getConversionRate() : $price;
     }
 }
