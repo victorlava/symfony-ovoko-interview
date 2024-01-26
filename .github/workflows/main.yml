@@ -9,7 +9,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-            
+        
+      - run: docker pull wiremock/wiremock
+      - run: docker run -it --rm -p 8080:8080 wiremock/wiremock
+      
       - name: Setup PHP Action
         uses: shivammathur/setup-php@2.29.0
         with:
@@ -20,7 +23,7 @@ jobs:
         run: composer install --no-progress --prefer-dist --optimize-autoloader
         
       - name: Run PHPUnit
-        run: ./vendor/bin/phpunit  
+        run: vendor/bin/phpunit  
 #      - run: echo "The ${{ github.repository }} repository has been cloned to the runner."
 #      - uses: php-actions/composer@v6
 #      - run: echo "Composer dependencies have been installed"
