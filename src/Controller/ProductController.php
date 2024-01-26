@@ -11,7 +11,7 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class ProductController extends AbstractController
 {
-    #[Route('/get_product_data', name: 'productData', methods: ['POST'])]
+    #[Route('/products/{id}', name: 'products', methods: ['GET'])]
     public function productData(Request $request, ProductFetcherService $service): Response
     {
         try {
