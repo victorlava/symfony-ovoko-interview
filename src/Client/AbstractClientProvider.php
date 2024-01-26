@@ -18,6 +18,6 @@ abstract class AbstractClientProvider
     {
         $response = $this->client->request('GET', sprintf($url, $id));
 
-        return json_decode($response->getContent(), 'json');
+        return json_decode($response->getContent(), true);
     }
 }
