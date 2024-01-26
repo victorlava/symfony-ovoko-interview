@@ -3,28 +3,30 @@
 namespace App\Service;
 
 use App\Response\ClientProviderResponse;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
 use App\Factory\ClientProviderFactory;
 use App\Validator\GenericProductProviderValidator;
 
 class ProductFetcherService
 {
-    public function getSingle(
-        Request $request,
-        GenericProductProviderValidator $validator,
-        ClientProviderFactory $factory,
-    ): ClientProviderResponse
+    public function __construct(
+        private GenericProductProviderValidator $validator,
+        private ClientProviderFactory $factory)
     {
-        $data = json_decode($request->getContent(), true, 512, JSON_THROW_ON_ERROR);
-        $validator->validate($data);
 
-        $client = $factory->create($data['marketplace']);
+    }
+    public function getSingle(Request $request): ClientProviderResponse
+    {
+        $id = $request->get('id');
+        $marketplace = $request->get('filter')['marketplace'] ?? null;
 
+        $this->validator->validate([
+            'item_id' => $id,
+            'marketplace' => $marketplace,
+        ]);
 
-        return $client->getProduct($data['item_id']);
+        $client = $this->factory->create($marketplace);
+
+        return $client->getProduct($id);
     }
 }

@@ -30,14 +30,8 @@ Product Fetcher diagram
 
 Here is request example to get preferred product data from preferred provider:
 ```shell
-curl --location --request POST 'localhost/get_product_data' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "marketplace": "<provider>",
-    "item_id":2
-}'
+curl --location --request GET 'localhost/products/<id>?filter[marketplace]=<provider>' \'
 ```
 For `<provider>` - `provider_b` or `provider_a` can be used.
-
 
 API has 3 items with ids: [1, 2, 3].
