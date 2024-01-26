@@ -10,8 +10,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ProductController extends AbstractController
 {
-    #[Route('/products/{id}', name: 'products', methods: ['GET'])]
-    public function productData(Request $request, ProductFetcherService $service): Response
+    #[Route('/products/{id}', name: 'product.get', methods: ['GET'])]
+    public function get(Request $request, ProductFetcherService $service): Response
     {
         try {
             $data = $service->getSingle($request);
