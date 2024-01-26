@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service;
+namespace App\Factory;
 
 use App\Client\ClientProviderA;
 use App\Client\ClientProviderB;

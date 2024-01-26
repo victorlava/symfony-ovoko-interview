@@ -2,6 +2,8 @@
 
 namespace App\Client;
 
+use App\Dto\ClientProviderDto;
+
 abstract class AbstractClientProvider
 {
     public function __construct(
@@ -13,7 +15,7 @@ abstract class AbstractClientProvider
 
     public function request(int $id, string $url): array
     {
-        $response = $this->client->request('GET', sprintf($url, $id);
+        $response = $this->client->request('GET', sprintf($url, $id));
 
         return json_decode($response->getContent(), 'json');
     }

@@ -8,6 +8,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
+use App\Factory\ClientProviderFactory;
+use App\Validator\GenericProductProviderValidator;
 
 class ProductFetcherService
 {
@@ -19,6 +21,7 @@ class ProductFetcherService
     {
         $data = json_decode($request->getContent(), true, 512, JSON_THROW_ON_ERROR);
         $validator->validate($data);
+
         $client = $factory->create($data['marketplace']);
 
 

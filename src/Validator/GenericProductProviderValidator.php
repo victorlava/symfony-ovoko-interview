@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service;
+namespace App\Validator;
 
 use App\Exception\ValidationException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
