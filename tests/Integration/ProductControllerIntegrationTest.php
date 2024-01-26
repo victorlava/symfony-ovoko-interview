@@ -20,6 +20,17 @@ class ProductControllerIntegrationTest extends WebTestCase
     }
 
     /** @dataProvider brokenRequestProvider */
+    public function testWhenProductIsNotFoundReturn404(mixed $id, mixed $marketplace): void
+    {
+        static::createClient()->request(
+            Request::METHOD_GET,
+            sprintf('/products/%d?filter[marketplace]=%s', $id, $marketplace),
+        );
+
+        $this->assertResponseStatusCodeSame(Response::HTTP_BAD_REQUEST);
+    }
+
+    /** @dataProvider notFoundMarketplaceProvider */
     public function testWhenSendingWrongRequestReturns400(mixed $id, mixed $marketplace): void
     {
         static::createClient()->request(
@@ -33,8 +44,16 @@ class ProductControllerIntegrationTest extends WebTestCase
     public function correctMarketplaceProvider(): array
     {
         return [
-            [5, 'provider_a'],
-            [10, 'provider_b'],
+            [1, 'provider_a'],
+            [2, 'provider_b'],
+        ];
+    }
+
+    public function notFoundMarketplaceProvider(): array
+    {
+        return [
+            [123, 'provider_a'],
+            [521, 'provider_b'],
         ];
     }
 
