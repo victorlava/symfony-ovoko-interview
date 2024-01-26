@@ -1,3 +1,14 @@
+## TODO
+
+- Provide OpenAPI
+- Github CI/CD
+- Makefile
+- Autowiring for factory
+- Codecoverage
+- Postman schema
+- Clean readme.md
+
+
 ## Local dev environment
 
 Environment is build on Symfony Docker, so for more information you can visit [Symfony Docker page](https://github.com/dunglas/symfony-docker).
