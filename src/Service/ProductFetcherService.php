@@ -11,7 +11,8 @@ class ProductFetcherService
 {
     public function __construct(
         private GenericProductProviderValidator $validator,
-        private ClientProviderFactory $factory)
+        private ClientProviderFactory $factory,
+    )
     {
 
     }
