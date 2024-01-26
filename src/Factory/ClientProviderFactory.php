@@ -9,8 +9,8 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 class ClientProviderFactory
 {
     public function __construct(
-        private HttpClientInterface $client,
-        private array $providers,
+        private readonly HttpClientInterface $client,
+        private readonly array $providers,
     )
     {
     }

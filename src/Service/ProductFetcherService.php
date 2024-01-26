@@ -5,13 +5,13 @@ namespace App\Service;
 use App\Response\ClientProviderResponse;
 use Symfony\Component\HttpFoundation\Request;
 use App\Factory\ClientProviderFactory;
-use App\Validator\GenericProductProviderValidator;
+use App\Validator\ProductProviderValidator;
 
 class ProductFetcherService
 {
     public function __construct(
-        private GenericProductProviderValidator $validator,
-        private ClientProviderFactory $factory,
+        private ProductProviderValidator $validator,
+        private ClientProviderFactory    $factory,
     )
     {
 

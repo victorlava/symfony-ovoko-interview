@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Integration;
+namespace App\Tests\Unit;
 
 use App\Client\ClientProviderA;
 use App\Dto\ClientProviderDto;
@@ -10,7 +10,7 @@ use Symfony\Component\HttpClient\Response\MockResponse;
 
 class ClientProviderAUnitTest extends TestCase
 {
-    public function testGetProduct()
+    public function testGetProduct(): void
     {
         $expected['id'] = 123;
         $expected['name'] = 'test';

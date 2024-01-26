@@ -4,13 +4,12 @@ namespace App\Validator;
 
 use App\Exception\ValidationException;
 
-class GenericProductProviderValidator
+class ProductProviderValidator
 {
     public function __construct(
         private array $providers = []
     )
     {
-        $this->providers = ['provider_a', 'provider_b']; //TODO: temporary
     }
 
     public function validate(array $data): array

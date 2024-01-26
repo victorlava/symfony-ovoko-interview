@@ -33,3 +33,7 @@ services:
     App\Factory\ClientProviderFactory:
         arguments:
             $providers: '%client%'
+
+    App\Validator\ProductProviderValidator:
+        arguments:
+            $providers: '%client%'
