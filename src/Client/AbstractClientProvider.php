@@ -3,6 +3,7 @@
 namespace App\Client;
 
 use App\Dto\ClientProviderDto;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 abstract class AbstractClientProvider
 {

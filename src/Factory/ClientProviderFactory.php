@@ -6,10 +6,6 @@ use App\Client\ClientProviderA;
 use App\Client\ClientProviderB;
 use App\Client\ClientProviderInterface;
 use App\Dto\ClientProviderDto;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class ClientProviderFactory
@@ -26,14 +22,20 @@ class ClientProviderFactory
         ]
     ];
 
+    public function __construct(private HttpClientInterface $client)
+    {
+    }
+
     public function create(string $marketplace): ClientProviderInterface
     {
-        if(isset($this->registry[$marketplace])) {
-            $settings = new ClientProviderDto($this->registry[$marketplace]);
+        try {
+            if (isset($this->registry[$marketplace])) {
+                $settings = new ClientProviderDto($this->registry[$marketplace]);
 
-            return new $this->registry[$marketplace]($settings);
+                return new $this->registry[$marketplace]['namespace']($this->client, $settings);
+            }
+        } catch(\Exception) {
+            throw new \Exception(sprintf('Marketplace %s not found in the registry or failed to initialize', $marketplace));
         }
-
-        throw new \Exception('Registry');
     }
 }

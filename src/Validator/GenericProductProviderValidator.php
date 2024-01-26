@@ -3,19 +3,14 @@
 namespace App\Validator;
 
 use App\Exception\ValidationException;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class GenericProductProviderValidator
 {
     public function __construct(
-        private readonly array $providers = []
+        private array $providers = []
     )
     {
-        //['provider_a', 'provider_b']
+        $this->providers = ['provider_a', 'provider_b']; //TODO: temporary
     }
 
     public function validate(array $data): array
