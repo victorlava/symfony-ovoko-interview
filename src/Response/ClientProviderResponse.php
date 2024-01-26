@@ -4,7 +4,11 @@ namespace App\Response;
 
 class ClientProviderResponse
 {
-    public function __construct(int $id, string $name, float $price)
+    public function __construct(
+        private int $id,
+        private string $name,
+        private float $price
+    )
     {
     }
 
